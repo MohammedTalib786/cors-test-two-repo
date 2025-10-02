@@ -9,16 +9,30 @@
 
 <body>
 
+    <ul id="ul">
+        <!-- <li></li> -->
+    </ul>
+
 
     <script>
         let url = "http://localhost:5000/api/products";
         const fetchingData = (async (url) => {
+            let ul = document.getElementById('ul');
+            let iHtml = "";
             try {
                 let res = await fetch(url);
                 let data = await res.json();
                 console.log('data', data)
+                data.map(elem => {
+                    console.log('elem', elem)
+                    iHtml += `<li>${elem.id}: ${elem.name}</li>`
+                })
+                ul.innerHTML = iHtml
+
+
             } catch (error) {
                 console.log('There is an error', error)
+                ul.innerHTML = "No Data Found!"
             }
         })(url)
     </script>
